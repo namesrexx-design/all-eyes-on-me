@@ -1,0 +1,6 @@
+# Layer over upstream's docker-compose.yml: run the All Eyes on Me image in place of the stock dashboard.
+#   docker compose --env-file <env> -f docker-compose.yml -f docker-compose.alleyes.yml up -d --no-build worldmonitor
+services:
+  worldmonitor:
+    image: all-eyes-on-me:1.0.0
+    pull_policy: never

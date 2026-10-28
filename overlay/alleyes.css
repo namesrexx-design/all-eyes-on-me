@@ -1,0 +1,97 @@
+/*
+ * All Eyes on Me - BizBox theme for World Monitor (AGPL-3.0, see LICENSE).
+ * Built on World Monitor by Elie Habib: https://github.com/koala73/worldmonitor
+ * Modified source: https://github.com/namesrexx-design/all-eyes-on-me
+ */
+
+/* BizBox dark OS theme: night-blue canvas, mint accent. */
+html:root {
+  --bg: #050c17;
+  --bg-secondary: #07121f;
+  --surface: #0a1626;
+  --surface-hover: #102238;
+  --surface-active: #12304a;
+  --border: #1d3347;
+  --border-strong: #2c4b66;
+  --border-subtle: #10202f;
+  --text: #e7f0ff;
+  --text-secondary: #c3d2e4;
+  --text-dim: #8ea3b9;
+  --text-muted: #8ea3b9;
+  --text-faint: #7b90a6;
+  --text-ghost: #5f7489;
+  --accent: #72f5de;
+  --input-bg: #0b1a2b;
+  --panel-bg: #0a1626;
+  --panel-border: #1d3347;
+  --scrollbar-thumb: #244058;
+  --scrollbar-thumb-hover: #35607f;
+  --map-bg: #050c17;
+  --map-grid: #0c2a3a;
+  --map-country: #0b2230;
+  --map-stroke: #1f6b66;
+  --status-live: #72f5de;
+  --font-body-base: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wm-bottom-banner: 0px;
+}
+html:root body { background: var(--bg); }
+
+/* Removed: accounts, upgrade prompts, Embed/Link, footer, GitHub/credit chips, upstream variants. */
+.pro-banner-slot, .pro-banner, #proBannerSlot, .auth-header-widget, #authWidgetMount, .auth-signin-btn, .auth-signup-link,
+#mobileAuthFallback, .mobile-auth-fallback, .site-footer, .github-link, .credit-link, .variant-switcher, #copyLinkBtn,
+#embedLinkBtn, .export-locked-state, .widget-pro-badge, .mobile-panel-nav-chip-pro, .ai-widget-block-pro,
+.header-left .logo, .header-left .logo-mobile, .header-left .version { display: none !important; }
+
+/* Brand */
+#aeBrand { display: inline-flex; align-items: center; gap: 9px; color: var(--text); text-decoration: none; margin: 0 6px 0 2px; flex: none; }
+#aeBrand img { display: block; width: 26px; height: 26px; }
+#aeBrand b { font: 700 13px/1 var(--font-body-base); letter-spacing: .14em; white-space: nowrap; }
+.ae-btn { cursor: pointer; }
+/* Phones hide the header-right buttons, so the credits stay reachable from a small button next to the name. */
+#aeAboutMini { display: none; }
+@media (max-width: 768px) { html:not(.ae-embedded) #aeAboutMini { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; margin-left: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 16px; cursor: pointer; } }
+#aeShare { background: rgba(114, 245, 222, .12); border-color: rgba(114, 245, 222, .5); color: #baffef; }
+#aeShare:hover { background: rgba(114, 245, 222, .22); }
+
+html.ae-embedded #aeBrand, html.ae-embedded #aeShare, html.ae-embedded #aeAboutBtn { display: none !important; }
+
+/* Phones: inside the BizBox shell the service header would only be an empty strip (name, Share and About live in the shell). */
+@media (max-width: 768px) { html.ae-embedded .header { display: none !important; } }
+
+/* Toast */
+#aeToast { position: fixed; z-index: 100000; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  background: #0a1626; color: #e7f0ff; border: 1px solid rgba(114, 245, 222, .5); border-radius: 12px; padding: 11px 16px;
+  font: 500 13px/1.4 var(--font-body-base); max-width: min(92vw, 460px); text-align: center; transition: opacity .2s, transform .2s; box-shadow: 0 14px 40px #0008; }
+#aeToast.is-on { opacity: 1; transform: translate(-50%, 0); }
+
+/* About / credits */
+#aeAbout { position: fixed; inset: 0; z-index: 100001; background: rgba(2, 8, 16, .72); display: grid; place-items: center; padding: 16px; }
+.ae-about-card { position: relative; width: min(560px, 100%); max-height: 88vh; overflow: auto; background: #0a1626; color: #e7f0ff;
+  border: 1px solid #1d3347; border-radius: 18px; padding: 26px 26px 22px; font: 14px/1.6 var(--font-body-base); box-shadow: 0 24px 80px #000a; }
+.ae-about-card h2 { margin: 12px 0 8px; font-size: 24px; letter-spacing: -.02em; font-weight: 600; }
+.ae-about-card h3 { margin: 18px 0 4px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #72f5de; font-weight: 600; }
+.ae-about-card p { margin: 6px 0; color: #c3d2e4; }
+.ae-about-card .ae-fine { color: #8ea3b9; font-size: 12px; margin-top: 16px; }
+.ae-about-card .ae-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.ae-about-card .ae-links a { color: #baffef; border: 1px solid rgba(114, 245, 222, .4); border-radius: 999px; padding: 7px 13px; text-decoration: none; font-size: 13px; }
+.ae-about-card .ae-links a:hover { background: rgba(114, 245, 222, .14); }
+.ae-x { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; border: 0; background: #14243a; color: #e7f0ff; font-size: 20px; cursor: pointer; }
+
+/* Map styles (the BizBox "worlds"): applied to the map surface only. */
+html[data-ae-style="neon"] #mapContainer { filter: saturate(1.8) contrast(1.18) brightness(1.08) hue-rotate(-8deg); }
+html[data-ae-style="neon"] #mapContainer::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 90px rgba(114, 245, 222, .28); }
+html[data-ae-style="cyberpunk"] #mapContainer { filter: hue-rotate(250deg) saturate(1.9) contrast(1.2) brightness(1.02); }
+html[data-ae-style="cyberpunk"] #mapContainer::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255, 0, 170, .07) 0 1px, transparent 1px 3px), linear-gradient(115deg, rgba(255, 0, 170, .16), transparent 45%, rgba(0, 229, 255, .16)); mix-blend-mode: screen; }
+html[data-ae-style="gta"] #mapContainer { filter: sepia(.55) saturate(1.7) contrast(1.28) brightness(.95) hue-rotate(-12deg); }
+html[data-ae-style="gta"] #mapContainer::after { content: ""; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 140px rgba(0, 0, 0, .6); }
+html[data-ae-style="roblox"] #mapContainer { filter: saturate(2.3) contrast(1.1) brightness(1.15); image-rendering: pixelated; }
+html[data-ae-style="pixar"] #mapContainer { filter: saturate(1.35) brightness(1.18) contrast(.94) sepia(.12) blur(.25px); }
+html[data-ae-style="pixar"] #mapContainer::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 35%, rgba(255, 214, 160, .2), transparent 65%); }
+@media (prefers-reduced-motion: reduce) { #aeToast { transition: none; } }
+
+/* Phone: keep the header usable without the removed chips. */
+@media (max-width: 760px) {
+  #aeBrand b { font-size: 11px; letter-spacing: .1em; }
+  #aeShare, #aeAboutBtn { padding-inline: 8px; }
+  #aeToast { bottom: 76px; }
+}

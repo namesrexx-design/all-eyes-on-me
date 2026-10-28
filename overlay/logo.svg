@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="All Eyes on Me">
+  <rect x="3" y="3" width="58" height="58" rx="15" fill="#07121f" stroke="#72f5de" stroke-opacity=".55" stroke-width="2"/>
+  <path d="M9 32c6-10 14-15 23-15s17 5 23 15c-6 10-14 15-23 15S15 42 9 32z" fill="none" stroke="#72f5de" stroke-width="3" stroke-linejoin="round"/>
+  <circle cx="32" cy="32" r="9" fill="#72f5de"/>
+  <circle cx="32" cy="32" r="3.6" fill="#050c17"/>
+  <circle cx="35.5" cy="28.5" r="1.8" fill="#e7f0ff"/>
+</svg>
