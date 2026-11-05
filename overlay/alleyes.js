@@ -332,7 +332,15 @@
   window.addEventListener('message', function (e) {
     if (CFG.parents.indexOf(e.origin) < 0 || !e.data || e.data.source !== 'alleyes-shell') return;
     var d = e.data;
-    if (d.type === 'hello') { parentWin = e.source; parentOrigin = e.origin; send('ready', { version: CFG.version, style: document.documentElement.getAttribute('data-ae-style'), layers: allLayers(), search: location.search }); }
+    if (d.type === 'hello') {
+      parentWin = e.source;
+      parentOrigin = e.origin;
+      var layers = allLayers();
+      // The overlay starts before World Monitor replaces its skeleton. Let the shell
+      // keep its public map until the real dashboard map and its controls are mounted.
+      if (!document.querySelector('#app #mapContainer') || !layers.some(function (layer) { return layer.id; })) return;
+      send('ready', { version: CFG.version, style: document.documentElement.getAttribute('data-ae-style'), layers: layers, search: location.search });
+    }
     else if (d.type === 'style') { setStyle(d.id); }
     else if (d.type === 'layer') { toggleLayer(d.id, d.on); }
   });
