@@ -1,6 +1,6 @@
 // Build-time patch for the World Monitor HTML entry pages (AGPL-3.0, see LICENSE).
 // Usage: node patch-html.mjs <html dir> [overlay version]
-// - loads the All Eyes on Me overlay first in <head>
+// - loads the All Eyes on Me overlay first in <head>, then the saved-World-Clock-cities script (overlay/clock-prefs.js)
 // - removes upstream analytics, structured data that names the original site, and canonical/social URLs
 // - sets the name, description and icon
 import { readFile, writeFile, readdir } from 'node:fs/promises';
@@ -11,7 +11,7 @@ const DESCRIPTION = 'All Eyes on Me: the BizBox live world view. Intelligence ma
 const NONCE = 'wm-static-bootstrap'; // the upstream page policy already trusts this static bootstrap nonce
 
 export function patch(html, version = '1.0.0') {
-  const injected = `<!--alleyes-config--><script nonce="${NONCE}" src="/alleyes/alleyes.js?v=${version}"></script><link rel="stylesheet" href="/alleyes/alleyes.css?v=${version}">`;
+  const injected = `<!--alleyes-config--><script nonce="${NONCE}" src="/alleyes/alleyes.js?v=${version}"></script><script nonce="${NONCE}" src="/alleyes/clock-prefs.js?v=${version}"></script><link rel="stylesheet" href="/alleyes/alleyes.css?v=${version}">`;
   let out = html;
   // 1. analytics and tracking scripts
   out = out.replace(/<script\b[^>]*\bsrc="[^"]*(abacus\.worldmonitor\.app|_vercel\/insights|vercel-scripts\.com|sentry)[^"]*"[^>]*>\s*<\/script>/gi, '');

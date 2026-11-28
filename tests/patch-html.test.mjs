@@ -23,6 +23,8 @@ test('overlay first, tracking and original-site references gone, name replaced, 
   const out = patch(sample, '9.9.9');
   assert.ok(out.indexOf('/alleyes/alleyes.js?v=9.9.9') < out.indexOf('/assets/main-1.js'));
   assert.match(out, /<meta charset="UTF-8" \/><!--alleyes-config--><script nonce="wm-static-bootstrap" src="\/alleyes\/alleyes\.js/);
+  const iOverlay = out.indexOf('/alleyes/alleyes.js'), iClock = out.indexOf('/alleyes/clock-prefs.js?v=9.9.9'), iApp = out.indexOf('/assets/main-1.js');
+  assert.ok(iOverlay < iClock && iClock < iApp, 'clock-prefs loads after the overlay and before the app');
   assert.doesNotMatch(out, /abacus|_vercel|ld\+json|canonical|og:url|preconnect|app-seo-summary/);
   assert.match(out, /<title>All Eyes on Me - BizBox<\/title>/);
   assert.match(out, /name="application-name" content="All Eyes on Me"/);
